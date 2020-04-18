@@ -1,0 +1,105 @@
+
+{
+  "Shape_x": 218,
+  "Shape_y": 178, 
+  "Shape_z": 3,
+  "Layers": [
+    {
+      "LayerType": 0,
+      "FilterSize": 32,
+      "KernelSize_x": 3,
+      "KernelSize_y": 3,
+      "Padding": "same",
+      "Strides_x": 1,
+      "Strides_y": 1
+    },
+    {
+      "LayerType": 1,
+      "ActivationType": "relu"
+    },
+    {
+      "LayerType": 0,
+      "FilterSize": 32,
+      "KernelSize_x": 3,
+      "KernelSize_y": 3,
+      "Padding": "same",
+      "Strides_x": 2,
+      "Strides_y": 2
+    },
+    {
+      "LayerType": 1,
+      "ActivationType": "relu"
+    },
+    {
+      "LayerType": 0,
+      "FilterSize": 64,
+      "KernelSize_x": 3,
+      "KernelSize_y": 3,
+      "Padding": "same",
+      "Strides_x": 1,
+      "Strides_y": 1
+    },
+    {
+      "LayerType": 1,
+      "ActivationType": "relu"
+    },
+    {
+      "LayerType": 0,
+      "FilterSize": 64,
+      "KernelSize_x": 3,
+      "KernelSize_y": 3,
+      "Padding": "same",
+      "Strides_x": 2,
+      "Strides_y": 2
+    },
+    {
+      "LayerType": 1,
+      "ActivationType": "relu"
+    },
+    {
+      "LayerType": 0,
+      "FilterSize": 64,
+      "KernelSize_x": 3,
+      "KernelSize_y": 3,
+      "Padding": "same",
+      "Strides_x": 1,
+      "Strides_y": 1
+    },
+    {
+      "LayerType": 1,
+      "ActivationType": "relu"
+    },
+    {
+      "LayerType": 0,
+      "FilterSize": 64,
+      "KernelSize_x": 3,
+      "KernelSize_y": 3,
+      "Padding": "same",
+      "Strides_x": 2,
+      "Strides_y": 2
+    },
+    {
+      "LayerType": 1,
+      "ActivationType": "relu"
+    },
+    {
+      "LayerType": 2
+    },
+    {
+      "LayerType": 3,
+      "Connections": 32
+    },
+    {
+      "LayerType": 1,
+      "ActivationType": "relu"
+    },
+    {
+      "LayerType": 3,
+      "Connections": 3
+    },
+    {
+      "LayerType": 1,
+      "ActivationType": "softmax"
+    }
+  ]
+}
