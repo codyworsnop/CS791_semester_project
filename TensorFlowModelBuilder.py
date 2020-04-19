@@ -30,4 +30,5 @@ class TensorFlowModelBuilder(implements(IModelBuilder)):
 
         model = models.Model(input_image, previousLayer)
 
+
         return model 

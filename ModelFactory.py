@@ -1,6 +1,7 @@
 from ConfigurationType import ConfigurationType 
 from Configuration import Configuration
 from TensorFlowModelBuilder import TensorFlowModelBuilder
+from TensorflowModel import TensorflowModel
 
 class ModelFactory(): 
 
@@ -10,6 +11,11 @@ class ModelFactory():
             
             #create the models 
             tfBuilder = TensorFlowModelBuilder() 
-            return tfBuilder.BuildModel(configuration) 
+            model = tfBuilder.BuildModel(configuration) 
+            return TensorflowModel(model) 
+
+        elif (configurationType == ConfigurationType.pytorch):
+            pass
+            #pytorchBuilder = 
         
        
