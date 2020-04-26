@@ -10,6 +10,8 @@ python-interface = "*"
 tensorflow = "*"
 opencv-python = "*"
 psutil = "*"
+torch = "==1.5.0+cu101"
+torchvision = "==0.6.0+cu101"
 
 [requires]
 python_version = "3.6"

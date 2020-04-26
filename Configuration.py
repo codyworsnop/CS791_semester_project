@@ -11,10 +11,15 @@ class Layer():
             self.KernelSize = (obj['KernelSize_x'], obj['KernelSize_y']) 
             self.Padding = obj['Padding']
             self.Strides = (obj['Strides_x'], obj['Strides_y'])
+            self.ChannelIn = obj['Channel_in']
+            self.ChannelOut = obj['Channel_out']
         elif (self.LayerType == LayerTypes.Activation):
             self.ActivationType = obj['ActivationType']
         elif (self.LayerType == LayerTypes.Dense):
             self.Connections = obj['Connections']
+            self.InputConnections = obj['InputConnections']
+        elif (self.LayerType == LayerTypes.GlobalAveragePooling2D):
+            self.KernelSize = obj['Kernel_size']
 
 class Configuration(): 
 

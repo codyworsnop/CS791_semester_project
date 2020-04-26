@@ -11,7 +11,7 @@ class DataGenerator(keras.utils.Sequence):
         self.dimension = configuration.Shape
         self.labels = labels
         self.image_names = image_names
-        self.batch_size = 128
+        self.batch_size = 256
 
         self.indexes = np.arange(len(self.image_names))
         np.random.shuffle(self.indexes)

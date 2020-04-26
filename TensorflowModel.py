@@ -39,7 +39,7 @@ class TensorflowModel(implements(IModel)):
 
             for batch in range(batches): 
 
-                print("processing batch:", batch, "of:", batches, "Elapsed time:", self.PerformanceCounter.Waypoint())
+                print("processing batch:", batch, "of:", batches, "Elapsed time:", self.PerformanceCounter.Waypoint(), epoch_accuracy.result())
 
                 features, labels = generator.__getitem__(batch)
                 loss_value, grads = self.grad(self.Model, features, labels)
@@ -52,7 +52,7 @@ class TensorflowModel(implements(IModel)):
 
             epoch_loss_avg.reset_states()
             epoch_accuracy.reset_states()
-            
+
     def Test(self, generator):
         
         batches = len(generator)
