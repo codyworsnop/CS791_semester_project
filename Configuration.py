@@ -20,6 +20,8 @@ class Layer():
             self.InputConnections = obj['InputConnections']
         elif (self.LayerType == LayerTypes.GlobalAveragePooling2D):
             self.KernelSize = obj['Kernel_size']
+        elif (self.LayerType == LayerTypes.Flatten):
+            self.DimensionToReduce = obj['Dimension_to_reduce']
 
 class Configuration(): 
 

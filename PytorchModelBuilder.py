@@ -35,13 +35,13 @@ class PytorchModelBuilder(implements(IModelBuilder), nn.Module):
         for layer_index, layer in enumerate(self.Configuration.Layers):      
 
             if (layer.LayerType == LayerTypes.Activation):
-                if (self.Configuration.Layers[layer_index - 1].LayerType == LayerTypes.GlobalAveragePooling2D):
-                    x = x.view(-1, 40 * 64 * 64)
-
                 if (layer.ActivationType == 'relu'):
                     x = F.relu(previousLayer(x))
                 elif (layer.ActivationType == 'sigmoid'):
                     x = F.sigmoid(previousLayer(x))
+
+            elif (layer.LayerType == LayerTypes.Flatten):
+                x = x.view(-1, layer.DimensionToReduce)
 
             previousLayer = self.Layers[layer_index]
 

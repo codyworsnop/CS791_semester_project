@@ -31,8 +31,12 @@
       "Channel_out": 64 
     },
     {
-      "LayerType": 1,
-      "ActivationType": "relu"
+      "LayerType": 2,
+      "Kernel_size": 64
+    },
+    {
+      "LayerType": 4,
+      "Dimension_to_reduce": 158400
     },
     {
       "LayerType": 3,

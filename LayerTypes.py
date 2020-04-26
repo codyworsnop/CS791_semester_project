@@ -5,3 +5,4 @@ class LayerTypes(Enum):
     Activation = 1
     GlobalAveragePooling2D = 2
     Dense = 3
+    Flatten = 4
