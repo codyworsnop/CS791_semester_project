@@ -20,7 +20,6 @@ class ModelFactory():
         elif (configurationType == ConfigurationType.pytorch):
             
             pytorchBuilder = PytorchModelBuilder(configuration)
-            print(pytorchBuilder)
             pytorchBuilder.BuildModel(configuration)
 
             return PytorchModel(pytorchBuilder)

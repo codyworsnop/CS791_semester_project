@@ -3,6 +3,8 @@ from ModelFactory import ModelFactory
 from ConfigurationType import ConfigurationType 
 from ImageDataGenerator import DataGenerator
 from DataReader import DataReader
+import cv2 
+import numpy as np
 
 #define paths / constants
 ConfigurationPath = 'Configuration.json'
@@ -11,9 +13,8 @@ ConfigurationPath = 'Configuration.json'
 ModelConfiguration = ConfigurationReader().ReadConfiguration(ConfigurationPath) 
 
 factory = ModelFactory()
-tf_model = factory.CreateNew(ConfigurationType.tf, ModelConfiguration)
+#tf_model = factory.CreateNew(ConfigurationType.tf, ModelConfiguration)
 pyt_model = factory.CreateNew(ConfigurationType.pytorch, ModelConfiguration)
-
 
 #setup data generation 
 reader = DataReader()
@@ -24,6 +25,9 @@ test_gen = DataGenerator(celeba_partition['test'], celeba_labels, ModelConfigura
 pyt_model.Prepare()
 pyt_model.Fit(training_gen)
 
+
 tf_model.Prepare()
 tf_model.Fit(training_gen)
 tf_model.Test(test_gen) 
+
+

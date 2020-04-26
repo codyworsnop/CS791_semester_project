@@ -20,11 +20,13 @@ class Layer():
             self.InputConnections = obj['InputConnections']
         elif (self.LayerType == LayerTypes.GlobalAveragePooling2D):
             self.KernelSize = obj['Kernel_size']
+            self.Stride = obj['Stride']
         elif (self.LayerType == LayerTypes.Flatten):
             self.DimensionToReduce = obj['Dimension_to_reduce']
 
 class Configuration(): 
 
-    def __init__(self, shape_x, shape_y, shape_z, layers: List[Layer]):
+    def __init__(self, shape_x, shape_y, shape_z, batch_size, layers: List[Layer]):
         self.Shape = (shape_x, shape_y, shape_z)
+        self.BatchSize = batch_size
         self.Layers = layers

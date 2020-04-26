@@ -19,7 +19,7 @@ class TensorFlowModelBuilder(implements(IModelBuilder)):
         elif (layerType == LayerTypes.Activation):
             return layers.Activation(layer.ActivationType)
         elif (layerType == LayerTypes.Flatten):
-            return layers.Flatten()
+            return layers.Flatten() 
 
     def BuildModel(self, configuration : Configuration):
 
@@ -28,6 +28,7 @@ class TensorFlowModelBuilder(implements(IModelBuilder)):
 
         for layer in configuration.Layers:
             model = self.GetModelLayerStep(layer)(previousLayer)
+            print(model)
             previousLayer = model 
 
         model = models.Model(input_image, previousLayer)

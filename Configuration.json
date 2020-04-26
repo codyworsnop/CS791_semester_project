@@ -1,8 +1,9 @@
 
 {
-  "Shape_x": 218,
-  "Shape_y": 178, 
+  "Shape_x": 109,
+  "Shape_y": 89, 
   "Shape_z": 3,
+  "Batch_size": 8,
   "Layers": [
     {
       "LayerType": 0,
@@ -31,17 +32,40 @@
       "Channel_out": 64 
     },
     {
+      "LayerType": 1,
+      "ActivationType": "relu"
+    },
+    {
       "LayerType": 2,
-      "Kernel_size": 64
+      "Kernel_size": 2, 
+      "Stride": 2
     },
     {
       "LayerType": 4,
-      "Dimension_to_reduce": 158400
+      "Dimension_to_reduce": 7680
+    },
+    {
+      "LayerType": 3,
+      "Connections": 1024,
+      "InputConnections": 61440
+    },
+    {
+      "LayerType": 1,
+      "ActivationType": "relu"
+    },
+    {
+      "LayerType": 3,
+      "Connections": 256,
+      "InputConnections": 1024
+    },
+    {
+      "LayerType": 1,
+      "ActivationType": "relu"
     },
     {
       "LayerType": 3,
       "Connections": 40,
-      "InputConnections": 64
+      "InputConnections": 256
     },
     {
       "LayerType": 1,

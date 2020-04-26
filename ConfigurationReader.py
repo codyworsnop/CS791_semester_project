@@ -9,7 +9,7 @@ class ConfigurationReader():
         if 'LayerType' in obj: 
             return Layer(obj['LayerType'], obj)
         else:
-            return Configuration(obj['Shape_x'], obj['Shape_y'], obj['Shape_z'], obj['Layers'])
+            return Configuration(obj['Shape_x'], obj['Shape_y'], obj['Shape_z'], obj['Batch_size'], obj['Layers'])
 
     def ReadConfiguration(self, configurationPath : str):
   

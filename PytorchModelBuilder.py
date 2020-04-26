@@ -12,7 +12,6 @@ class PytorchModelBuilder(implements(IModelBuilder), nn.Module):
     def __init__(self, configuration):
         super(PytorchModelBuilder, self).__init__()
         self.Configuration = configuration
-
         self.Layers = nn.ModuleList()
 
     def BuildModel(self, configuration : Configuration):
@@ -26,23 +25,26 @@ class PytorchModelBuilder(implements(IModelBuilder), nn.Module):
             elif (layerType == LayerTypes.Dense):
                 self.Layers.append(nn.Linear(layer.InputConnections, layer.Connections))
             elif (layerType == LayerTypes.GlobalAveragePooling2D): 
-                self.Layers.append(nn.AvgPool2d(layer.KernelSize))
+                self.Layers.append(nn.MaxPool2d(layer.KernelSize, layer.Stride))
+            else:
+                self.Layers.append(None) #use this as a placeholder. We likely defined a layer than wont be implemented until forward() prop 
 
     def forward(self, x):
         
-        previousLayer = None
-    
         for layer_index, layer in enumerate(self.Configuration.Layers):      
+
+            currentLayer = self.Layers[layer_index]
 
             if (layer.LayerType == LayerTypes.Activation):
                 if (layer.ActivationType == 'relu'):
-                    x = F.relu(previousLayer(x))
+                    x = F.relu(x)
                 elif (layer.ActivationType == 'sigmoid'):
-                    x = F.sigmoid(previousLayer(x))
+                    x = F.sigmoid(x)
 
             elif (layer.LayerType == LayerTypes.Flatten):
-                x = x.view(-1, layer.DimensionToReduce)
-
-            previousLayer = self.Layers[layer_index]
+                x = x.view(-1, layer.DimensionToReduce * self.Configuration.BatchSize)
+            
+            else:
+                x = currentLayer(x) #otherwise append the layer as is.
 
         return x

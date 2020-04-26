@@ -12,16 +12,17 @@ class PytorchModel(implements(IModel)):
 
     def __init__(self, model): 
 
-        super(PytorchModel, self).__init__()
         self.Model = model 
-        self.PerformanceCounter = PerformanceCounter() 
+        self.PerformanceCounter = PerformanceCounter()
+        self.Device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.Model.to(self.Device) #convert the model to use GPU 
 
     def Prepare(self):
         pass 
 
     def Fit(self, generator): 
 
-        criterion = nn.CrossEntropyLoss()
+        criterion = nn.MSELoss()
         optimizer = optim.SGD(self.Model.parameters(), lr=0.001, momentum=0.9)
 
         for epoch in range(5):
@@ -39,17 +40,24 @@ class PytorchModel(implements(IModel)):
 
                 features, labels = generator.__getitem__(batch)
                 features = np.swapaxes(features, 3, 1) #pytorch expects batch x channel size x width x height 
-
-                outputs = self.Model(torch.from_numpy(features))
+                features, labels = torch.from_numpy(features).float(), torch.from_numpy(labels).float() #pytorch only wants tensors
+                features, labels = features.to(self.Device), labels.to(self.Device)
+                
+                outputs = self.Model(features)
                 loss = criterion(outputs, labels)
                 loss.backward()
                 optimizer.step()
 
                 running_loss += loss.item()
-                if i % 2000 == 1999:    # print every 2000 mini-batches
-                    print('[%d, %5d] loss: %.3f' %
-                        (epoch + 1, i + 1, running_loss / 2000))
-                    running_loss = 0.0
+
+                print("Accuracy:", self.calculate_accuracy(labels, outputs))
+                print('[%d, %5d] loss: %.3f' % (epoch + 1, batch + 1, running_loss))
+                running_loss = 0.0
+
+    def calculate_accuracy(self, labels, prediction):
+        rounded_predictions = torch.round(prediction)
+        correct = (rounded_predictions == labels).sum().float()
+        return correct / (labels.shape[0] * labels.shape[1])
 
     def Test(self, generator):
         pass 
