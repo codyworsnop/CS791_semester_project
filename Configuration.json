@@ -3,7 +3,7 @@
   "Shape_x": 109,
   "Shape_y": 89, 
   "Shape_z": 3,
-  "Batch_size": 8,
+  "Batch_size": 64,
   "Layers": [
     {
       "LayerType": 0,
@@ -42,12 +42,12 @@
     },
     {
       "LayerType": 4,
-      "Dimension_to_reduce": 7680
+      "Dimension_to_reduce": 61440
     },
     {
       "LayerType": 3,
       "Connections": 1024,
-      "InputConnections": 61440
+      "InputConnections": 3932160
     },
     {
       "LayerType": 1,

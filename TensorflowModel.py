@@ -24,14 +24,15 @@ class TensorflowModel(implements(IModel)):
         return loss_value, tape.gradient(loss_value, model.trainable_variables)
 
     def Fit(self, generator): 
-
+        
+        usageStates = [] 
         optimizer = tf.keras.optimizers.SGD(learning_rate=0.01)
         epoch_loss_avg = tf.keras.metrics.Mean()
         epoch_accuracy = tf.keras.metrics.BinaryAccuracy() 
 
         for epoch in range(5):
 
-            print("processing epoch:", epoch, "of:", 5)
+            print("processing epoch:", epoch, "of:", )
 
             batches = len(generator)
 
@@ -50,8 +51,11 @@ class TensorflowModel(implements(IModel)):
             
             print("epoch loss:", epoch_loss_avg.result(), "Epoch accuracy:", epoch_accuracy.result(), "Total time:", self.PerformanceCounter.Stop())
 
+            usageStates.append(self.PerformanceCounter.GetUsageStats()) 
             epoch_loss_avg.reset_states()
             epoch_accuracy.reset_states()
+
+        return usageStates
 
     def Test(self, generator):
         
@@ -64,3 +68,4 @@ class TensorflowModel(implements(IModel)):
                 test_accuracy.update_state(labels, self.Model(features, training=False)) 
 
         print ("Total test accuracy:", test_accuracy.result())
+        return test_accuracy.result()
